@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Обратный отсчет: Игра в Кальмара 3 сезон</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #e60000;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px #e60000;
+        }
+
+        #countdown {
+            font-size: 3em;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px #e60000;
+        }
+
+        .shapes {
+            margin-top: 30px;
+        }
+
+        .shape {
+            width: 50px;
+            height: 50px;
+            background: #e60000;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .square {
+            /* квадрат по умолчанию */
+        }
+    </style>
+</head>
+<body>
+    <h1>SQUID GAME<br>3 SEASON</h1>
+
+    <div id="countdown">Загрузка...</div>
+
+    <div class="shapes">
+        <div class="shape triangle"></div>
+        <div class="shape circle"></div>
+        <div class="shape square"></div>
+    </div>
+
+    <script>
+        const countdown = document.getElementById('countdown');
+        const targetDate = new Date('June 27, 2025 11:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance <= 0) {
+                countdown.innerHTML = "Время настало!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
